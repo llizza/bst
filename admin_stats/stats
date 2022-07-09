@@ -1,0 +1,21 @@
+import matplotlib.pyplot as plt
+from bot import db
+
+class Statistics():
+    async def form_visit_stats(self):
+        visits = await db.get_visits()
+        res = [item[0] for item in visits]
+        plt.xlabel("Дата")
+        plt.ylabel("Количество посещений")
+        plt.hist(res, histtype = 'bar', rwidth = 0.5, color='blue')
+        plt.show()
+
+
+    async def form_new_users_stats(self):
+        new_users = await db.get_registration_date()
+        res = [item[0] for item in new_users]
+        plt.hist(res, bins = 10, histtype='bar', rwidth=0.5, color='red')
+        plt.xlabel("Дата")
+        plt.ylabel("Количество регистраций")
+        return plt.show()
+
